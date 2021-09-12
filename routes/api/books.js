@@ -3,7 +3,7 @@ const { Book } = require('../../models/book');
 
 // Matches with "/api/books"
 
-router.post("/", async (req, res) => {
+router.post("/books", async (req, res) => {
     const newBook = new Book(req.body)
     try{
         const savedBook = await newBook.save();
@@ -13,7 +13,7 @@ router.post("/", async (req, res) => {
     }
 });
 
-router.get("/", async (req, res) => {
+router.get("/books", async (req, res) => {
     try {Book
       .find(req.query)
       .sort({ date: -1 })

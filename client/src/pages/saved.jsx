@@ -15,7 +15,7 @@ export default function Saved() {
     const [cards, setCards] = useState([])
     const [loading, setLoading] = useState(false)
     useEffect(() => {
-        axios.get('api/')
+        axios.get('/api/books')
         .then(function(response){
             console.log(response.data)
             setCards(response.data)

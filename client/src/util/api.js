@@ -8,7 +8,7 @@ import axios from "axios";
   // Saves a book to the database
    function saveBook (bookData) {
      console.log(bookData)
-    return axios.post("/api/", bookData).then(result => result.data).catch(err => {
+    return axios.post("/api/books", bookData).then(result => result.data).catch(err => {
       console.log(err);
   });
   }

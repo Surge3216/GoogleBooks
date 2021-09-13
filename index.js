@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require('mongoose');
-const bookRoutes = requite('./routes/books.js')
+const bookRoutes = require('./routes/books.js')
 var cors = require('cors');
 const path = require("path");
 // const { MONGODB } = require('./config');

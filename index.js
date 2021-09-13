@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require('mongoose');
-const routes = require('./routes')
+const bookRoutes = requite('./routes/books.js')
 var cors = require('cors');
 const path = require("path");
 // const { MONGODB } = require('./config');
@@ -17,9 +17,6 @@ mongoose
     console.log('MongoDB Connected');
   })
 
-// Define middleware here
-;
-app.use(express.json());
 // Serve up static assets (usually on heroku)
 
   app.use(express.static("client/build"));
@@ -28,7 +25,7 @@ app.use(express.json());
 
 
 // Define API routes here
-app.use(routes)
+app.use("/api/books", bookRoutes)
 
 // Send every other request to the React app
 app.get("*", (req, res) => {

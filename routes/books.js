@@ -1,8 +1,6 @@
 const router = require('express').Router();
 const { Book } = require('../models/book');
 
-// Matches with "/api/books"
-
 router.post("/", async (req, res) => {
     const newBook = new Book(req.body)
     try{
@@ -21,6 +19,5 @@ router.get("/", async (req, res) => {
         res.status(500).json(err)
     }
   })
-// Matches with "/api/books/:id"
 
     module.exports = router;

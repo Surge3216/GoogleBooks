@@ -1,37 +1,39 @@
-const express = require("express");
-const mongoose = require('mongoose');
-const bookRoutes = require('./routes/books.js')
-var cors = require('cors');
-const path = require("path");
-// const { MONGODB } = require('./config');
-const PORT = process.env.PORT || 3001;
+const express = require('express');
 const app = express();
-app.use(cors());
+const cors = require('cors');
+const mongoose = require('mongoose')
+const path = require('path');
+
+// const { MONGODB } = require('./config')
+const booksRoute = require('./routes/books')
+
 app.use(express.json());
+app.use(cors());
 app.use(express.static(path.join(__dirname, "client", "build")))
 
+app.use('/api/books', booksRoute)
 
-mongoose
-  .connect(process.env.MONGODB, {  useUnifiedTopology: true, useNewUrlParser: true })
-  .then(() => {
-    console.log('MongoDB Connected');
-  })
+app.get('/', (req, res)=>{
+    res.send('welcome')
+})
 
-// Serve up static assets (usually on heroku)
-
-  app.use(express.static("client/build"));
-
-
-
-
-// Define API routes here
-app.use("/api/books", bookRoutes)
-
-// Send every other request to the React app
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
 
-app.listen(PORT, () => {
-  console.log(`🌎 ==> API server now on port ${PORT}!`);
-});
+app.listen(process.env.PORT || 8080, function(){
+    console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+  });
+
+
+  mongoose
+  .connect(process.env.MONGODB, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log('MongoDB Connected');
+  })
+  .then((res) => {
+    console.log(`Server running`);
+  })
+  .catch(err => {
+    console.error(err)
+  })
